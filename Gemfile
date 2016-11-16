@@ -30,7 +30,8 @@ gem 'jbuilder', '~> 1.2'
 gem 'rails_12factor', group: :production
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'sprockets', '2.11.0'
-
+gem 'simple_form'
+gem "devise", ">=3.2.4"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
