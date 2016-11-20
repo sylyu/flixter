@@ -20,16 +20,22 @@ class Instructor::LessonsController < ApplicationController
   end
 
   # To let Rails know it can let the view call the method
-  def helper_method :current_session
+  helper_method :current_section
 
-  def current_session
+  # says - if we've looked up the current_section beforehand use the value that we 
+  # looked up previously. If we haven't looked up this section before, go into the 
+  # database, look it up and also make sure to remember the value in case we need 
+  # to look it up again later. 
+  # memoization -  technique of storing certain values inside of 
+  # the memory to reduce the times we have to find a certain value inside the database 
+  def current_section
     # if @current_section == nil
     #   @current_section = Section.find(params[:section_id])
     #   @current_section
     # else
     #   @current_section
     # end
-    @current_session ||= Section.find(params[:section_id])
+    @current_section ||= Section.find(params[:section_id])
   end
 
   def lesson_params
