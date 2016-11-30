@@ -35,8 +35,8 @@ gem "devise", ">=3.2.4"
 gem 'figaro'
 gem 'fog'
 gem 'mini_magick', '~> 4.3.1'
-gem 'carrierwave', '0.10.0'
-gem 'carrierwave-aws', '1.0.0'
+gem 'carrierwave'
+gem 'carrierwave-aws'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
