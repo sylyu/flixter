@@ -29,9 +29,14 @@ ActiveRecord::Schema.define(version: 20161130213839) do
   add_index "courses", ["user_id"], name: "index_courses_on_user_id", using: :btree
 
   create_table "enrollments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "enrollments", ["course_id"], name: "index_enrollments_on_course_id", using: :btree
+  add_index "enrollments", ["user_id", "course_id"], name: "index_enrollments_on_user_id_and_course_id", using: :btree
 
   create_table "lessons", force: true do |t|
     t.string   "title"
