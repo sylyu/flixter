@@ -1,5 +1,19 @@
-<br />
+<script>
+  $(function() {
+    $('.lessons').sortable({
+      update: function( event, ui ) {
+        $.ajax({
+          type: 'PUT',
+          url: ui.item.data('update-url'),
+          dataType: 'json',
+          data: { lesson: {row_order_position: ui.item.index() } }
+        });
+      }
+    });
+  });
+</script>
 
+<br />
 <div class="booyah-box col-xs-10 col-xs-offset-1">
   <h1 class="text-center"><%= current_course.title %></h1>
     <%= image_tag current_course.image, class: 'img-responsive' %> 
@@ -15,9 +29,22 @@
     <li>
       <%= section.title %>
       <%= link_to 'New Lesson', new_instructor_section_lesson_path(section), class: 'pull-right btn btn-primary btn-xs' %>
-      <ul>
-      <% section.lessons.each do |lesson| %>
+      <ul class="lessons">
         <li>
+          <b>Making Pancakes</b> - Secret Recipes
+        </li>
+        <li>
+          <b>Inviting People to Breakfast</b> - You know you want an invite.
+        </li>
+        <li>
+          <b>Eating Pancakes</b> - Om Nom Nom
+        </li>
+        <li>
+          <b>Washing Pancake Dishes</b> - Sike! User paper plates and throw them away!
+        </li>
+      </ul>
+      <% section.lessons.rank(:row_order).each do |lesson| %>
+        <li data-update-url="<%= instructor_lesson_path(lesson) %>">
           <b><%= lesson.title %></b>
           - 
           <%= lesson.subtitle %>

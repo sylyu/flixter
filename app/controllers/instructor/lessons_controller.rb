@@ -1,6 +1,7 @@
 class Instructor::LessonsController < ApplicationController
   before_action :authenticate_user!
-  before_action :require_authorized_for_current_section
+  before_action :require_authorized_for_current_section, only: [:new, :create]
+  before_action :require_authorized_for_current_lesson, only: [:update]
   
   def new
     @lesson = Lesson.new
@@ -11,34 +12,36 @@ class Instructor::LessonsController < ApplicationController
     redirect_to instructor_course_path(current_section.course)
   end
 
+  def update
+    current_lesson.update_attributes(lesson_params)
+    render text: 'updated!'
+  end
+
   private
 
-   def require_authorized_for_current_section
-    if current_section.course.user != current_user
-      return render text: 'Unauthorized', status: :unauthorized
+  def require_authorized_for_current_lesson
+    if current_lesson.section.course.user != current_user
+      render text => 'Unauthorized', status => :unauthorized
     end
   end
 
-  # To let Rails know it can let the view call the method
-  helper_method :current_section
+  def current_lesson
+    @current_lesson ||= Lesson.find(params[:id])
+  end
 
-  # says - if we've looked up the current_section beforehand use the value that we 
-  # looked up previously. If we haven't looked up this section before, go into the 
-  # database, look it up and also make sure to remember the value in case we need 
-  # to look it up again later. 
-  # memoization -  technique of storing certain values inside of 
-  # the memory to reduce the times we have to find a certain value inside the database 
+  def require_authorized_for_current_section
+    if current_section.course.user != current_user
+      render text => 'Unauthorized', status => :unauthorized
+    end
+  end
+
+  helper_method :current_section
   def current_section
-    # if @current_section == nil
-    #   @current_section = Section.find(params[:section_id])
-    #   @current_section
-    # else
-    #   @current_section
-    # end
     @current_section ||= Section.find(params[:section_id])
   end
 
   def lesson_params
-    params.require(:lesson).permit(:title, :subtitle, :video)
+    params.require(:lesson).permit(:title, :subtitle, :video, :row_order_position)
   end
+
 end
