@@ -37,7 +37,11 @@ class Instructor::LessonsController < ApplicationController
 
   helper_method :current_section
   def current_section
-    @current_section ||= Section.find(params[:section_id])
+    if params[:section_id]
+      @current_section ||= Section.find(params[:section_id])
+    else
+      current_lesson.section
+    end
   end
 
   def lesson_params
