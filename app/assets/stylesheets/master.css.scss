@@ -68,15 +68,21 @@ body {
   padding: 8px;
   margin: 10px;
 }
-.lesson {
-  background-color: black;
-  margin-top: 10px;
-  height: 130px;
-}
 .section {
   border: 1px solid;
   border-color: #e4e4e4 #bebebd #bebebd #e4e4e4;
   padding: 20px;
+}
+.section-li {
+  border: 1px solid;
+  border-color: #e4e4e4 #bebebd #bebebd #e4e4e4;
+  padding: 20px;
+  margin: 20px;
+}
+.lesson {
+  background-color: black;
+  margin-top: 10px;
+  height: 130px;
 }
 .lesson a {
   color: white;
@@ -87,4 +93,29 @@ body {
 .lesson a b {
   font-weight: 100;
   font-size: 25px;
+}
+.lessons li {
+  background: black;
+  color: white;
+  margin: 10px;
+  font-family: "Helvetica Neue", Helvetica;
+  font-weight: 100;
+  padding: 8px;
+  font-size: 15px;
+}
+.lessons li b {
+  font-size: 25px;
+  font-weight: 100px;
+}
+.lessons li p {
+  margin: 0;
+}
+ul {
+  list-style-type: none;
+}
+ul .header {
+  font-size: 25px;
+}
+ul .header .glyphicon {
+  font-size: 20px;
 }
