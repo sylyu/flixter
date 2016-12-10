@@ -25,24 +25,11 @@
   </div>
 
   <ul>
-    <% current_course.sections.each do |section| %>
+    <% current_course.sections.rank(:row_order).each do |section| %>
     <li>
       <%= section.title %>
       <%= link_to 'New Lesson', new_instructor_section_lesson_path(section), class: 'pull-right btn btn-primary btn-xs' %>
       <ul class="lessons">
-        <li>
-          <b>Making Pancakes</b> - Secret Recipes
-        </li>
-        <li>
-          <b>Inviting People to Breakfast</b> - You know you want an invite.
-        </li>
-        <li>
-          <b>Eating Pancakes</b> - Om Nom Nom
-        </li>
-        <li>
-          <b>Washing Pancake Dishes</b> - Sike! User paper plates and throw them away!
-        </li>
-      </ul>
       <% section.lessons.rank(:row_order).each do |lesson| %>
         <li data-update-url="<%= instructor_lesson_path(lesson) %>">
           <b><%= lesson.title %></b>
