@@ -35,12 +35,13 @@ body {
   margin: 4px;
 }
 .social a:hover {
-  text-decoration:none;
+  text-decoration: none;
 }
-$footer-height-mobile: 200px;
-@media (max-width: 75px ) {
+
+$footer-height-mobile: auto;
+@media (max-width: 750px ) {
   #footer {
-    height:$footer-height-mobile;
+    height: $footer-height-mobile;
   }
 
   #wrap {
@@ -48,7 +49,7 @@ $footer-height-mobile: 200px;
     /* Pad the bottom of the footer */
     padding: 0 0 $footer-height-mobile;
   }
-  #footer social {
+  #footer .social {
     margin-top: 10px;
   }
 }
